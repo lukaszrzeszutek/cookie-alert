@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+	<style type="text/css">
+		element.style {
+    color: rgb(255, 255, 255);
+    background: rgba(56, 56, 56, 0.85);
+    display: block;
+}
+.pea_cook_wrapper.pea_cook_bottomright {
+    bottom: 30px;
+    right: 30px;
+    margin-left: 5%;
+}
+.pea_cook_wrapper {
+    position: fixed;
+    padding: 0px 11px;
+    margin: 0;
+    border-radius: 5px;
+    z-index: 10000;
+    text-align: center;
+}
+
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+p {
+  font-size: 13px
+}
+button.pea_cook_btn {
+    background: #e3e3e3;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    box-shadow: inset 0 0 1px 1px #f6f6f6;
+    color: #333;
+    font: bold 12px "helvetica neue", helvetica, arial, sans-serif;
+    line-height: 1;
+    padding: 5px 0;
+    text-align: center;
+    text-shadow: 0 1px 0 #fff;
+    width: 100px;
+    margin-left: 20px;
+}
+
+button.pea_cook_btn:hover {
+    cursor: pointer;
+}
+
+
+	</style>
+
+</head>
+<body>
+
+    <div id="list" class="pea_cook_wrapper pea_cook_bottomright" style="color: rgb(255, 255, 255); background: rgba(56, 56, 56, 0.85); display: block;"><p>Kontynuując przeglądanie strony, wyrażasz zgodę na używanie przez nas plików cookies. <a style="color:#FFFFFF;" href="#" id="fom">Więcej informacji</a> <button id="pea_cook_btn" class="pea_cook_btn" href="#">Akceptuję</button></p></div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+        //Get current time
+        var currentTime = new Date().getTime();
+        //Add hours function
+        Date.prototype.addHours = function(h) {    
+           this.setTime(this.getTime() + (h*60*60*1000)); 
+           return this;   
+        }
+        //Get time after 24 hours
+        var after24 = new Date().addHours(10).getTime();
+        //Hide div click
+        $('#pea_cook_btn').click(function(){
+            //Hide div
+            $('#list').hide();
+            //Set desired time till you want to hide that div
+            localStorage.setItem('desiredTime', after24); 
+        });
+        //If desired time >= currentTime, based on that HIDE / SHOW
+        if(localStorage.getItem('desiredTime') >= currentTime)
+        {
+            $('#list').hide();
+        }
+        else
+        {
+            $('#list').show();
+        }
+});
+</script>
+
+</body>
+</html>
